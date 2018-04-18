@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Nota</string>
+    <string name="nota">Nota</string>
+    <string name="visualizacao_vazia">Nenhuma nota adicionada!</string>
+</resources>
