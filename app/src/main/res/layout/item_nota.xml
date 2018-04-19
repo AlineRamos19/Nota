@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_marginBottom="8dp"
+    android:id="@+id/card_view">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +19,14 @@
             android:fontFamily="sans-serif-light"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_gravity="center"
             tools:text="Titulo da Nota" />
 
         <TextView
             android:id="@+id/nota"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-light"
             android:textSize="15sp"

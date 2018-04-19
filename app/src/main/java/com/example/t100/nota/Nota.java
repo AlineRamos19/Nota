@@ -8,7 +8,6 @@ import io.objectbox.annotation.Id;
 public class Nota {
 
     public Nota(){
-
     }
 
     @Id(assignable = true)
