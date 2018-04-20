@@ -1,11 +1,13 @@
 package com.example.t100.nota;
 
+import java.io.Serializable;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
 
 @Entity
-public class Nota {
+public class Nota implements Serializable {
 
     public Nota(){
     }
@@ -17,6 +19,14 @@ public class Nota {
 
     public Nota(String titulo, String nota) {
         this.titulo = titulo;
+        this.nota = nota;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setNota(String nota) {
         this.nota = nota;
     }
 

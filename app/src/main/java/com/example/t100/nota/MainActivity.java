@@ -51,23 +51,19 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-        Box<Nota> notaBox = boxStore.boxFor(Nota.class);
-        listaNota = notaBox.getAll();
-
-        if (listaNota != null && listaNota.size() > 0) {
-            adapter = new NotaAdapater(this, listaNota);
-            recyclerView.setAdapter(adapter);
-
-        } else {
-            TextView visuVazia = findViewById(R.id.visu_vazia);
-            visuVazia.setText(R.string.visualizacao_vazia);
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        getListaNota();
+    }
 
+    public void getListaNota() {
+        Box<Nota> notaBox = boxStore.boxFor(Nota.class);
+        listaNota = notaBox.getAll();
+        adapter = new NotaAdapater(this, listaNota);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }

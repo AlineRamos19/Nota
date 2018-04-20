@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:elevation="4dp"
     android:id="@+id/card_view">
 
     <LinearLayout
@@ -18,7 +19,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_gravity="center"
             tools:text="Titulo da Nota" />
 

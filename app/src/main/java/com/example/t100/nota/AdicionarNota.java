@@ -10,11 +10,15 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,15 +35,31 @@ public class AdicionarNota extends AppCompatActivity {
     List<Nota> listaNota = new ArrayList<>();
     EditText titulo;
     EditText notas;
-    Button btnSalvar;
+    TextView btnSalvar;
     LinearLayout linearLayout;
+    Nota n;
+    private static final String LOG = AdicionarNota.class.getSimpleName();
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_nota);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        try {
+            n = (Nota) getIntent().getExtras().getSerializable("nota");
+            EditText titulo = findViewById(R.id.titulo);
+            EditText nota = findViewById(R.id.note);
+            titulo.setText(n.getTitulo());
+            nota.setText(n.getNota());
+        } catch (NullPointerException e) {
+            Log.e(LOG, "Error: " + e.getMessage());
+        }
+
 
         linearLayout = findViewById(R.id.linear);
         btnSalvar = findViewById(R.id.btn_salvar);
@@ -54,30 +74,34 @@ public class AdicionarNota extends AppCompatActivity {
     private void salvarDados() {
 
         titulo = findViewById(R.id.titulo);
-        String strTitulo = titulo.getText().toString();
-
+        final String strTitulo = titulo.getText().toString();
         notas = findViewById(R.id.note);
-        String strNota = notas.getText().toString();
+        final String strNota = notas.getText().toString();
 
         if (!strTitulo.trim().isEmpty() && !strNota.trim().isEmpty()) {
-            novaNota = new Nota(strTitulo, strNota);
 
+            new AlertDialog.Builder(AdicionarNota.this).setTitle("Atenção")
+                    .setMessage("Confirmar nova nota?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    notaBox = boxStore.boxFor(Nota.class);
 
-           new AlertDialog.Builder(AdicionarNota.this).setTitle("Atenção")
-                   .setMessage("Confirmar nova nota?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialogInterface, int i) {
-                   notaBox = boxStore.boxFor(Nota.class);
-                   notaBox.put(novaNota);
-                   finish();
-               }
-           }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialogInterface, int i) {
+                    if (n != null) {
+                        n.setTitulo(strTitulo);
+                        n.setNota(strNota);
+                        notaBox.put(n);
+                    } else {
+                        novaNota = new Nota(strTitulo, strNota);
+                        notaBox.put(novaNota);
+                    }
+                    finish();
+                }
+            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
-               }
-           }).show();
-
+                }
+            }).show();
         } else {
             Snackbar.make(linearLayout, "Favor preencher todos os campos!",
                     Snackbar.LENGTH_SHORT).show();
@@ -88,12 +112,26 @@ public class AdicionarNota extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, MainActivity.class));
-                finishAffinity();
-                break;
+
+                new AlertDialog.Builder(AdicionarNota.this).setTitle("Atenção")
+                        .setMessage("As alterações não serão salvas!").setPositiveButton("Sim, sair.", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(AdicionarNota.this, MainActivity.class));
+                        finishAffinity();
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
+
             default:
                 break;
         }
         return true;
     }
+
+
 }
