@@ -132,6 +132,4 @@ public class AdicionarNota extends AppCompatActivity {
         }
         return true;
     }
-
-
 }
