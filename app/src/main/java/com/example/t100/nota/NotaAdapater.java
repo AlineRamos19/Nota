@@ -5,19 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -59,7 +54,7 @@ public class NotaAdapater extends RecyclerView.Adapter<NotaAdapater.NotaViewHlde
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Box<Nota> notaBox = boxStore.boxFor(Nota.class);
                         notaBox.remove(nota);
-                        EventBus.getDefault().post(new UpdateNota(notaBox.getAll()));
+                        EventBus.getDefault().post(new Event(notaBox.getAll()));
                     }
                 }).setNegativeButton("Editar", new DialogInterface.OnClickListener() {
                     @Override

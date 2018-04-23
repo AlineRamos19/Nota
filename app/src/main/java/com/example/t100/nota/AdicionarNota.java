@@ -56,6 +56,7 @@ public class AdicionarNota extends AppCompatActivity {
             EditText nota = findViewById(R.id.note);
             titulo.setText(n.getTitulo());
             nota.setText(n.getNota());
+            getSupportActionBar().setTitle(R.string.title_actionbar_editar);
         } catch (NullPointerException e) {
             Log.e(LOG, "Error: " + e.getMessage());
         }
@@ -80,8 +81,8 @@ public class AdicionarNota extends AppCompatActivity {
 
         if (!strTitulo.trim().isEmpty() && !strNota.trim().isEmpty()) {
 
-            new AlertDialog.Builder(AdicionarNota.this).setTitle("Atenção")
-                    .setMessage("Confirmar nova nota?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(AdicionarNota.this).setTitle(getString(R.string.dialog_atencao))
+                    .setMessage(R.string.dialog_confirmacao_novanota).setPositiveButton(R.string.dialog_sim, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     notaBox = boxStore.boxFor(Nota.class);
@@ -96,14 +97,14 @@ public class AdicionarNota extends AppCompatActivity {
                     }
                     finish();
                 }
-            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            }).setNegativeButton(getString(R.string.dialog_cancelar), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                 }
             }).show();
         } else {
-            Snackbar.make(linearLayout, "Favor preencher todos os campos!",
+            Snackbar.make(linearLayout, R.string.aviso_campo_vazio,
                     Snackbar.LENGTH_SHORT).show();
         }
     }
@@ -113,14 +114,14 @@ public class AdicionarNota extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                new AlertDialog.Builder(AdicionarNota.this).setTitle("Atenção")
-                        .setMessage("As alterações não serão salvas!").setPositiveButton("Sim, sair.", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(AdicionarNota.this).setTitle(R.string.dialog_atencao)
+                        .setMessage(R.string.dialog_alteracao_naosalva).setPositiveButton(R.string.dialog_sair_sem_salvar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(AdicionarNota.this, MainActivity.class));
                         finishAffinity();
                     }
-                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.dialog_cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

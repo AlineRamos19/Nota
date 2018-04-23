@@ -47,11 +47,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_salvar"
         android:padding="15dp"
+        android:textSize="18sp"
+        android:textColor="#880E4F"
         android:gravity="center"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-light"
         android:background="@drawable/background"
-        android:layout_marginTop="24dp"
-        android:layout_gravity="center"
         android:text="Salvar"/>
 
 </LinearLayout>

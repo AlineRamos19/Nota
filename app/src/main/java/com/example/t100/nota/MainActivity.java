@@ -4,15 +4,10 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     List<Nota> listaNota = new ArrayList<>();
 
     @Subscribe
-    public void onEvent(UpdateNota event){
+    public void onEvent(Event event){
         adapter = new NotaAdapater(this, event.getListaNota());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -58,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        GridLayoutManager layoutManager =
+                new GridLayoutManager(this,  2);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -76,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-
-
 
     @Override
     protected void onStart() {

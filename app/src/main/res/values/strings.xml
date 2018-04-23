@@ -2,4 +2,12 @@
     <string name="app_name">Nota</string>
     <string name="nota">Nota</string>
     <string name="visualizacao_vazia">Nenhuma nota adicionada!</string>
+    <string name="title_actionbar_editar">Editar</string>
+    <string name="aviso_campo_vazio">Favor preencher todos os campos!</string>
+    <string name="dialog_atencao">Atenção</string>
+    <string name="dialog_alteracao_naosalva">As alterações não serão salvas!</string>
+    <string name="dialog_sair_sem_salvar">Sim, sair.</string>
+    <string name="dialog_cancelar">Cancelar</string>
+    <string name="dialog_confirmacao_novanota">Confirmar nova nota?</string>
+    <string name="dialog_sim">Sim</string>
 </resources>
