@@ -14,6 +14,9 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     NotaAdapater adapter;
     List<Nota> listaNota = new ArrayList<>();
+
+    @Subscribe
+    public void onEvent(UpdateNota event){
+        adapter = new NotaAdapater(this, event.getListaNota());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +75,21 @@ public class MainActivity extends AppCompatActivity {
         adapter = new NotaAdapater(this, listaNota);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
