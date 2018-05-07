@@ -16,10 +16,12 @@ public class Nota implements Serializable {
     public long id;
     private String titulo;
     private String nota;
+    private String dataHora;
 
-    public Nota(String titulo, String nota) {
+    public Nota(String titulo, String nota, String dataHora) {
         this.titulo = titulo;
         this.nota = nota;
+        this.dataHora = dataHora;
     }
 
     public void setTitulo(String titulo) {
@@ -42,4 +44,11 @@ public class Nota implements Serializable {
         return nota;
     }
 
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
+    }
 }

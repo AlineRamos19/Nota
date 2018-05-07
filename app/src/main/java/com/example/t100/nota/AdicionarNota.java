@@ -92,7 +92,7 @@ public class AdicionarNota extends AppCompatActivity {
                         n.setNota(strNota);
                         notaBox.put(n);
                     } else {
-                        novaNota = new Nota(strTitulo, strNota);
+                        novaNota = new Nota(strTitulo, strNota, getData());
                         notaBox.put(novaNota);
                     }
                     finish();
@@ -132,5 +132,12 @@ public class AdicionarNota extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+
+    public String getData() {
+        Date data = new Date();
+        java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(data);
     }
 }

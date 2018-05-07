@@ -44,7 +44,7 @@ public class NotaAdapater extends RecyclerView.Adapter<NotaAdapater.NotaViewHlde
         final Nota nota = listaNota.get(position);
         holder.titulo.setText(nota.getTitulo());
         holder.nota.setText(nota.getNota());
-        holder.data.setText(getData());
+        holder.data.setText(nota.getDataHora());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +86,5 @@ public class NotaAdapater extends RecyclerView.Adapter<NotaAdapater.NotaViewHlde
             data = itemView.findViewById(R.id.data_nota);
         }
     }
-
-    public String getData() {
-        Date data = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return simpleDateFormat.format(data);
-    }
-
 
 }
