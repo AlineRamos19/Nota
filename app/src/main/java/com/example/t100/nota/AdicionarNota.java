@@ -30,7 +30,7 @@ public class AdicionarNota extends AppCompatActivity {
     EditText notas;
     TextView btnSalvar;
     LinearLayout linearLayout;
-    Nota ngit statuewNota;
+    Nota newNota;
     private static final String LOG = AdicionarNota.class.getSimpleName();
 
     @SuppressWarnings("ConstantConditions")
