@@ -1,24 +1,17 @@
 package com.example.t100.nota;
 
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +30,7 @@ public class AdicionarNota extends AppCompatActivity {
     EditText notas;
     TextView btnSalvar;
     LinearLayout linearLayout;
-    Nota n;
+    Nota ngit statuewNota;
     private static final String LOG = AdicionarNota.class.getSimpleName();
 
     @SuppressWarnings("ConstantConditions")
@@ -51,11 +44,11 @@ public class AdicionarNota extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         try {
-            n = (Nota) getIntent().getExtras().getSerializable("nota");
+            newNota = (Nota) getIntent().getExtras().getSerializable("nota");
             EditText titulo = findViewById(R.id.titulo);
             EditText nota = findViewById(R.id.note);
-            titulo.setText(n.getTitulo());
-            nota.setText(n.getNota());
+            titulo.setText(newNota.getTitulo());
+            nota.setText(newNota.getNota());
             getSupportActionBar().setTitle(R.string.title_actionbar_editar);
         } catch (NullPointerException e) {
             Log.e(LOG, "Error: " + e.getMessage());
@@ -82,15 +75,16 @@ public class AdicionarNota extends AppCompatActivity {
         if (!strTitulo.trim().isEmpty() && !strNota.trim().isEmpty()) {
 
             new AlertDialog.Builder(AdicionarNota.this).setTitle(getString(R.string.dialog_atencao))
-                    .setMessage(R.string.dialog_confirmacao_novanota).setPositiveButton(R.string.dialog_sim, new DialogInterface.OnClickListener() {
+                    .setMessage(R.string.dialog_confirmacao_novanota).setPositiveButton
+                    (R.string.dialog_sim, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     notaBox = boxStore.boxFor(Nota.class);
 
-                    if (n != null) {
-                        n.setTitulo(strTitulo);
-                        n.setNota(strNota);
-                        notaBox.put(n);
+                    if (newNota != null) {
+                        newNota.setTitulo(strTitulo);
+                        newNota.setNota(strNota);
+                        notaBox.put(newNota);
                     } else {
                         novaNota = new Nota(strTitulo, strNota, getData());
                         notaBox.put(novaNota);
